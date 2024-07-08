@@ -3,6 +3,7 @@ import './App.css';
 import ResponsiveAppBar from './componenets/Appbar';
 import ImageCarousel from './componenets/ImageCarousel';
 import Category from './componenets/Category';
+import BestSelling from './componenets/BestSelling';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <ResponsiveAppBar />
       <ImageCarousel/>
       <Category/>
+      <BestSelling />
     </>
   );
 }

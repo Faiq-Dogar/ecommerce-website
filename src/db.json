@@ -1,0 +1,68 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "whitw shirt",
+            "catagory": "men",
+            "oldPrice": 700,
+            "newPrice": "",
+            "rating": 4
+        },
+        {
+            "id": 2,
+            "name": "black watch",
+            "catagory": "watch",
+            "oldPrice": 700,
+            "newPrice": "",
+            "rating": 3.5
+        },
+        {
+            "id": 3,
+            "name": "IPhone 15 pro",
+            "catagory": "phone",
+            "oldPrice": 700,
+            "newPrice": "",
+            "rating": 5
+        },
+        {
+            "id": 4,
+            "name": "Benson",
+            "catagory": "watch",
+            "oldPrice": 700,
+            "newPrice": "",
+            "rating": 4.5
+        },
+        {
+            "id": 5,
+            "name": "Infiniz Hot 10 Play",
+            "catagory": "phone",
+            "oldPrice": 700,
+            "newPrice": "",
+            "rating": 4
+        },
+        {
+            "id": 6,
+            "name": "Blue Women Jeans",
+            "catagory": "women",
+            "oldPrice": 700,
+            "newPrice": "",
+            "rating": 4
+        },
+        {
+            "id": 7,
+            "name": "Controller",
+            "catagory": "game",
+            "oldPrice": 700,
+            "newPrice": "",
+            "rating": 2
+        },
+        {
+            "id": 9,
+            "name": "Audionic super headphone",
+            "catagory": "headphone",
+            "oldPrice": 700,
+            "newPrice": "",
+            "rating": 3
+        }
+    ]
+}
