@@ -1,19 +1,13 @@
 import React from 'react'
-import items from '../db.json';
 
-const ProductItem = () => {
+const ProductItem = ({ item_name, price, stars }) => {
 
     return (
         <div>
-            {items.map((item) => {
-                {
-                    <div><p>{item.name}</p>
-                        <p>{item.oldPrice}</p>
-                    </div>
-                }
-            })}
-        </div>
-    )
+            <p>{item_name}</p>
+            <p>{price} <span>{stars}</span></p>
+        </div >
+    );
 }
 
 export default ProductItem
