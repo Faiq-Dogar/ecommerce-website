@@ -36,7 +36,10 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" style={{
+            backgroundColor: 'white',
+            color: 'black'
+        }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     {/* ICON for medium */}
@@ -71,7 +74,7 @@ function ResponsiveAppBar() {
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, mx:2, color: 'white', display: 'block', fontWeight: '100' }}
+                                sx={{ my: 2, mx: 2, display: 'block', color: 'inherit', fontWeight: '100' }}
                             >
                                 {page}
                             </Button>
