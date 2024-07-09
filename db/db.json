@@ -5,7 +5,7 @@
             "name": "White Shirt",
             "catagory": "men",
             "oldPrice": 700,
-            "newPrice": "",
+            "newPrice": 0,
             "rating": 4
         },
         {
@@ -13,7 +13,7 @@
             "name": "Black Watch",
             "catagory": "watch",
             "oldPrice": 700,
-            "newPrice": "",
+            "newPrice": 550,
             "rating": 3.5
         },
         {
@@ -21,7 +21,7 @@
             "name": "IPhone 15 pro",
             "catagory": "phone",
             "oldPrice": 700,
-            "newPrice": "",
+            "newPrice": 0,
             "rating": 5
         },
         {
@@ -29,31 +29,31 @@
             "name": "Benson",
             "catagory": "watch",
             "oldPrice": 700,
-            "newPrice": "",
+            "newPrice": 0,
             "rating": 4.5
         },
         {
             "id": 5,
             "name": "Infiniz Hot 10 Play",
             "catagory": "phone",
-            "oldPrice": 700,
-            "newPrice": "",
+            "oldPrice": 21000,
+            "newPrice": 19500,
             "rating": 4
         },
         {
             "id": 6,
-            "name": "Blue Women Jeans",
+            "name": "Women White Shirt",
             "catagory": "women",
             "oldPrice": 700,
-            "newPrice": "",
+            "newPrice": 500,
             "rating": 4
         },
         {
             "id": 7,
             "name": "Controller",
             "catagory": "game",
-            "oldPrice": 700,
-            "newPrice": "",
+            "oldPrice": 1500,
+            "newPrice": 1200,
             "rating": 2
         },
         {
@@ -61,7 +61,7 @@
             "name": "Audionic super headphone",
             "catagory": "headphone",
             "oldPrice": 700,
-            "newPrice": "",
+            "newPrice": 0,
             "rating": 3
         }
     ]
