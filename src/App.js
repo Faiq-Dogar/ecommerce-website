@@ -9,6 +9,8 @@ import Features from './componenets/Features';
 import Footer from './componenets/Footer';
 import { useEffect, useState } from 'react'
 import BestProducts from './componenets/BestProducts';
+import saleImage from './Images/Screenshot 2024-07-10 013926.png'
+import Offer from './componenets/Offer';
 
 function App() {
 
@@ -39,9 +41,10 @@ function App() {
       <ImageCarousel />
       <BestSelling
         text={"Flash Sales"}
-        items={items.filter(item => item.newPrice !== 0).slice(0,4)} />
+        items={items.filter(item => item.newPrice !== 0).slice(0, 4)} />
       <Category />
-      <BestProducts text={"Best Selling Products"} items={items.sort((a,b) => b.rating - a.rating).slice(0,4)} />
+      <BestProducts text={"Best Selling Products"} items={items.sort((a, b) => b.rating - a.rating).slice(0, 4)} />
+      <Offer saleImage={saleImage} />
       <BestSelling text={"Explore Our Products"} items={items} />
       <NewArrival />
       <Features />
