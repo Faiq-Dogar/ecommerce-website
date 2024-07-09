@@ -5,6 +5,8 @@ import ImageCarousel from './componenets/ImageCarousel';
 import Category from './componenets/Category';
 import BestSelling from './componenets/BestSelling';
 import NewArrival from './componenets/NewArrival';
+import Features from './componenets/Features';
+import Footer from './componenets/Footer';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <Category/>
       <BestSelling />
       <NewArrival/>
+      <Features/>
+      <Footer/>
     </>
   );
 }
