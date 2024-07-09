@@ -4,6 +4,7 @@ import ResponsiveAppBar from './componenets/Appbar';
 import ImageCarousel from './componenets/ImageCarousel';
 import Category from './componenets/Category';
 import BestSelling from './componenets/BestSelling';
+import NewArrival from './componenets/NewArrival';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <ImageCarousel/>
       <Category/>
       <BestSelling />
+      <NewArrival/>
     </>
   );
 }

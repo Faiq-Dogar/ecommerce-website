@@ -2,7 +2,7 @@
     "products": [
         {
             "id": 1,
-            "name": "whitw shirt",
+            "name": "White Shirt",
             "catagory": "men",
             "oldPrice": 700,
             "newPrice": "",
@@ -10,7 +10,7 @@
         },
         {
             "id": 2,
-            "name": "black watch",
+            "name": "Black Watch",
             "catagory": "watch",
             "oldPrice": 700,
             "newPrice": "",
