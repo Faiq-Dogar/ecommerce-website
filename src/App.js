@@ -39,9 +39,9 @@ function App() {
       <ImageCarousel />
       <BestSelling
         text={"Flash Sales"}
-        items={items.filter(item => item.newPrice !== 0)} />
+        items={items.filter(item => item.newPrice !== 0).slice(0,4)} />
       <Category />
-      <BestProducts text={"Best Selling Products"} items={items} />
+      <BestProducts text={"Best Selling Products"} items={items.sort((a,b) => b.rating - a.rating).slice(0,4)} />
       <BestSelling text={"Explore Our Products"} items={items} />
       <NewArrival />
       <Features />
