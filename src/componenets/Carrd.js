@@ -4,7 +4,7 @@ import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/m
 const Carrd = ({ aboutImage }) => {
     return (
         <Card sx={{ maxWidth: 345 }}>
-            <CardActionArea>
+            {/* <CardActionArea> */}
                 <CardMedia
                     component="img"
                     height="300"
@@ -19,7 +19,7 @@ const Carrd = ({ aboutImage }) => {
                         Position
                     </Typography>
                 </CardContent>
-            </CardActionArea>
+            {/* </CardActionArea> */}
         </Card>
     )
 }
