@@ -1,6 +1,6 @@
 import ResponsiveAppBar from './componenets/Appbar';
 import LandingPage from './pages/LandingPage';
-import ProductDiscription from './pages/ProductDiscription';
+import Product from './pages/Product';
 import Footer from './componenets/Footer';
 import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
@@ -45,7 +45,7 @@ function App() {
           items={items}
           saleImage={saleImage}
         />} />
-        <Route path='/products' element={<ProductDiscription
+        <Route path='/products' element={<Product
           items={items}
           saleImage={saleImage}
           filter={filter}

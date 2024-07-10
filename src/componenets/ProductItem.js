@@ -1,22 +1,26 @@
 import { Rating, Typography } from '@mui/material';
 import React from 'react'
 
-const ProductItem = ({ image, item_name, price, newprice, stars }) => {
+const ProductItem = ({ image, item }) => {
+
+    const showDisc = () => {
+        
+    }
 
     return (
         <div>
-            <img src={image} alt='product image' style={{ width: "100%", height: "300px" }} />
+            <img src={image} alt='product image' className='product-image' onClick={showDisc}/>
             <Typography variant='h6'>
-                {<p>{item_name}</p>}
+                {<p>{item.name}</p>}
             </Typography>
             <p className='sale-price'>
-                {newprice === 0 ?
-                    <p>Rs. {price}/-</p>:
-                    (<p><span style={{ textDecoration: "line-through", marginRight:"15px", color:"grey" }}>Rs. {price}/-</span>Rs. {newprice}/-</p>)
+                {item.newPrice === 0 ?
+                    <p>Rs. {item.oldPrice}/-</p> :
+                    (<p><span style={{ textDecoration: "line-through", marginRight: "15px", color: "grey" }}>Rs. {item.oldPrice}/-</span>Rs. {item.newPrice}/-</p>)
                 }
                 <p className='rating'>
-                    <Rating name="half-rating" defaultValue={stars} precision={0.5} disabled/>
-                    </p>
+                    <Rating name="half-rating" defaultValue={item.rating} precision={0.5} disabled />
+                </p>
             </p>
         </div>
     );

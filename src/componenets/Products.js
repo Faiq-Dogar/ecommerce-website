@@ -24,12 +24,10 @@ const Products = ({ items }) => {
 
     return (
         <Grid container spacing={4}>
-
-
             {items.map((item) => (
                 <Grid item xs={6} md={3}>
                     <div key={item.id}>
-                        <ProductItem image={image8} item_name={item.name} price={item.oldPrice} newprice={item.newPrice} stars={item.rating} />
+                        <ProductItem image={image8} item={item} />
                     </div>
                 </Grid>
             ))}
