@@ -3,6 +3,7 @@ import React from 'react'
 import BreadCrum from '../componenets/BreadCrum'
 import SubHeadingDescription from '../componenets/SubHeadingDescription'
 import TextCard from '../componenets/TextCard'
+import Form from "../componenets/Form";
 
 const Contact = () => {
     return (
@@ -15,6 +16,7 @@ const Contact = () => {
                     </div>
                 </Grid>
                 <Grid item xs={6} md={8}>
+                    <Form />
                 </Grid>
             </Grid>
         </Container>
