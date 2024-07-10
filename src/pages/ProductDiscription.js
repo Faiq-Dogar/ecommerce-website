@@ -1,8 +1,13 @@
-import { Container, Grid } from '@mui/material'
+import { Container, Grid, Rating } from '@mui/material'
 import React from 'react'
 import Subheading from '../componenets/Subheading'
+import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-const ProductDiscription = ({ item }) => {
+const ProductDiscription = () => {
+    const location = useLocation();
+    const { item } = location.state;
+    
     return (
         <Container maxWidth="xl">
             <Grid container spacing={6} sx={{ mb: "5%" }}>

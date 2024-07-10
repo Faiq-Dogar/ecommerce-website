@@ -9,6 +9,7 @@ import image5 from "../Images/Ribbed_T-shirt_white_1200x.jpg"
 import image6 from "../Images/Ribbed_T-shirt_white_1200x.jpg"
 import image7 from "../Images/Ribbed_T-shirt_white_1200x.jpg"
 import image8 from "../Images/11_f900d3f6-3afd-4f1f-80c3-53311e3b3e7c_800x-ezgif.com-webp-to-jpg-converter.jpg"
+import { Outlet } from 'react-router-dom'
 
 const Products = ({ items }) => {
     const item_pics = [
@@ -23,6 +24,7 @@ const Products = ({ items }) => {
     ]
 
     return (
+        <>
         <Grid container spacing={4}>
             {items.map((item) => (
                 <Grid item xs={6} md={3}>
@@ -34,6 +36,8 @@ const Products = ({ items }) => {
 
 
         </Grid>
+        <Outlet />
+        </>
     )
 }
 

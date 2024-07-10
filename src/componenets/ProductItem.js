@@ -1,10 +1,12 @@
 import { Rating, Typography } from '@mui/material';
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const ProductItem = ({ image, item }) => {
+    const navigate = useNavigate();
 
     const showDisc = () => {
-        
+        navigate(`/product/${item.id}`, { state: { item } });
     }
 
     return (

@@ -8,6 +8,7 @@ import saleImage from './Images/Screenshot 2024-07-10 013926.png'
 import aboutImage from './Images/Screenshot 2024-07-10 155335.png'
 import About from './pages/About';
 import Contact from './pages/Contact';
+import ProductDiscription from './pages/ProductDiscription';
 
 function App() {
 
@@ -53,7 +54,8 @@ function App() {
         <Route path='/about' element={<About
           aboutImage={aboutImage}
         />} />
-        <Route path='/contacts' element={<Contact/>} />
+        <Route path='/contacts' element={<Contact />} />
+        <Route path="/product/:productId" element={<ProductDiscription />} />
       </Routes>
       <Footer />
     </>
