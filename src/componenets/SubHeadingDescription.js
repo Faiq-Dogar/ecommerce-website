@@ -2,7 +2,7 @@ import React from 'react'
 
 const SubHeadingDescription = ({text}) => {
   return (
-    <div>
+    <div >
       {text}
     </div>
   )

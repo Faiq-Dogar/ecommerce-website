@@ -9,7 +9,7 @@ const BestSelling = ({text, items}) => {
         <Container maxWidth="xl">
             <Heading name={text} />
             <Products items={items} />
-            <Btns2 text={"View All Products"}/>
+            {/* <Btns2 text={"View All Products"}/> */}
             <hr/>
         </Container>
     )

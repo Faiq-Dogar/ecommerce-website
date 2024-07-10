@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,8 +14,26 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Home', 'Products', 'About', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const pages = [
+    {
+        name: "Home",
+        url: "/"
+    },
+    {
+        name: "Products",
+        url: "/products"
+    },
+    {
+        name: "About",
+        url: "/about"
+    },
+    {
+        name: "Contact",
+        url: "/contacts"
+    }
+];
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -73,15 +92,15 @@ function ResponsiveAppBar() {
                         {pages.map((page) => (
                             <Button
                                 key={page}
+                                component={Link}
+                                to={page.url}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, mx: 2, display: 'block', color: 'inherit', fontWeight: '100' }}
                             >
-                                {page}
+                                {page.name}
                             </Button>
                         ))}
                     </Box>
-
-
 
                     {/* MENU for small */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -114,8 +133,13 @@ function ResponsiveAppBar() {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                <MenuItem
+                                    key={page}
+                                    component={Link}
+                                    to={page.url}
+                                    onClick={handleCloseNavMenu}
+                                >
+                                    <Typography textAlign="center">{page.name}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -142,7 +166,6 @@ function ResponsiveAppBar() {
                     >
                         LOGO
                     </Typography>
-
 
                     {/* For avatar  */}
                     <Box sx={{ flexGrow: 0 }}>
@@ -181,3 +204,4 @@ function ResponsiveAppBar() {
     );
 }
 export default ResponsiveAppBar;
+//                                    to={`/${page.toLowerCase()}`}

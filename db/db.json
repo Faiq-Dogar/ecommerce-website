@@ -11,7 +11,7 @@
         {
             "id": 2,
             "name": "Black Watch",
-            "catagory": "watch",
+            "catagory": "watches",
             "oldPrice": 700,
             "newPrice": 550,
             "rating": 3.5
@@ -27,7 +27,7 @@
         {
             "id": 4,
             "name": "Benson",
-            "catagory": "watch",
+            "catagory": "watches",
             "oldPrice": 700,
             "newPrice": 0,
             "rating": 4.5
@@ -51,7 +51,7 @@
         {
             "id": 7,
             "name": "Controller",
-            "catagory": "game",
+            "catagory": "gaming",
             "oldPrice": 1500,
             "newPrice": 1200,
             "rating": 2
@@ -59,7 +59,7 @@
         {
             "id": 9,
             "name": "Audionic super headphone",
-            "catagory": "headphone",
+            "catagory": "headphones",
             "oldPrice": 700,
             "newPrice": 0,
             "rating": 3

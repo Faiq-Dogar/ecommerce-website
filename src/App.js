@@ -1,21 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
 import ResponsiveAppBar from './componenets/Appbar';
-import ImageCarousel from './componenets/ImageCarousel';
-import Category from './componenets/Category';
-import BestSelling from './componenets/BestSelling';
-import NewArrival from './componenets/NewArrival';
-import Features from './componenets/Features';
+import LandingPage from './pages/LandingPage';
+import ProductDiscription from './pages/ProductDiscription';
 import Footer from './componenets/Footer';
 import { useEffect, useState } from 'react'
-import BestProducts from './componenets/BestProducts';
+import { Route, Routes } from 'react-router-dom';
 import saleImage from './Images/Screenshot 2024-07-10 013926.png'
-import Offer from './componenets/Offer';
+import aboutImage from './Images/Screenshot 2024-07-10 155335.png'
+import About from './pages/About';
 
 function App() {
 
   const API_URL = "http://localhost:3500/products";
   const [items, setItems] = useState([]);
+  const [originalItems, setOriginalItems] = useState([]);
 
   useEffect(() => {
     const fetch_items = async () => {
@@ -26,6 +23,7 @@ function App() {
         }
         const list = await response.json();
         setItems(list);
+        setOriginalItems(list);
       } catch (err) {
         console.log("Errrororororororo" + err);
       }
@@ -33,21 +31,28 @@ function App() {
     fetch_items()
   }, [])
 
+  const filter = (catory) => {
+    setItems(originalItems.filter((item) => item.catagory === catory));
+  }
+
+
   return (
-    // <div className="App">
-    // </div>
     <>
       <ResponsiveAppBar />
-      <ImageCarousel />
-      <BestSelling
-        text={"Flash Sales"}
-        items={items.filter(item => item.newPrice !== 0).slice(0, 4)} />
-      <Category />
-      <BestProducts text={"Best Selling Products"} items={items.sort((a, b) => b.rating - a.rating).slice(0, 4)} />
-      <Offer saleImage={saleImage} />
-      <BestSelling text={"Explore Our Products"} items={items} />
-      <NewArrival />
-      <Features />
+      <Routes>
+        <Route path='/' element={<LandingPage
+          items={items}
+          saleImage={saleImage}
+        />} />
+        <Route path='/products' element={<ProductDiscription
+          items={items}
+          saleImage={saleImage}
+          filter={filter}
+        />} />
+        <Route path='/about' element={<About
+          aboutImage={aboutImage}
+        />} />
+      </Routes>
       <Footer />
     </>
   );

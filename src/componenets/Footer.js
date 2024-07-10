@@ -2,8 +2,6 @@ import { Box, Grid, List, ListItem, ListItemButton, ListItemText, Typography } f
 import React from 'react'
 import Heading from './Heading'
 import Subheading from './Subheading'
-import SubHeadingDescription from './SubHeadingDescription'
-import SimpleText from './SimpleText'
 import NavList from './NavList'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
