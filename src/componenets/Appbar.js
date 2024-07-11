@@ -43,7 +43,7 @@ const settings = [
     },
     {
         name: "Sign Up",
-        url: "/about"
+        url: "/signUp"
     },
     {
         name: "Logout",

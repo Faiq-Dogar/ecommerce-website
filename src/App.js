@@ -10,6 +10,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import ProductDiscription from './pages/ProductDiscription';
 import Signin from './pages/Signin';
+import SignUp from './pages/SignUp';
 
 function App() {
 
@@ -58,6 +59,7 @@ function App() {
         <Route path='/contacts' element={<Contact />} />
         <Route path="/product/:productId" element={<ProductDiscription />} />
         <Route path="/signIn" element={<Signin/>} />
+        <Route path="/signUp" element={<SignUp/>} />
       </Routes>
       <Footer />
     </>
