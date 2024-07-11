@@ -9,6 +9,7 @@ import aboutImage from './Images/Screenshot 2024-07-10 155335.png'
 import About from './pages/About';
 import Contact from './pages/Contact';
 import ProductDiscription from './pages/ProductDiscription';
+import Signin from './pages/Signin';
 
 function App() {
 
@@ -56,6 +57,7 @@ function App() {
         />} />
         <Route path='/contacts' element={<Contact />} />
         <Route path="/product/:productId" element={<ProductDiscription />} />
+        <Route path="/signIn" element={<Signin/>} />
       </Routes>
       <Footer />
     </>

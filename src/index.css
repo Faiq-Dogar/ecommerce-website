@@ -47,3 +47,7 @@ body {
   margin-bottom: "auto";
   font-size: "2em";
 }
+.login-form{
+  width:70%;
+  margin: 25% auto;
+}
