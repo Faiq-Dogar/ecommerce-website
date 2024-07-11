@@ -2,7 +2,7 @@ import { Container } from '@mui/material'
 import React from 'react'
 import { useLocation } from 'react-router-dom';
 import BreadCrums from '../componenets/BreadCrum';
-
+import BestSelling from '../componenets/BestSelling';
 import DiscriptionGrid from '../componenets/DiscriptionGrid';
 
 const ProductDiscription = () => {
@@ -13,6 +13,8 @@ const ProductDiscription = () => {
         <Container maxWidth="xl">
             <BreadCrums previous={"Products"} now={item.name} />
             <DiscriptionGrid item={item} />
+            {/* <hr />
+            <BestSelling text={"Explore More Products"} items={item} /> */}
         </Container>
     )
 }

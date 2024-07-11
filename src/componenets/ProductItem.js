@@ -6,7 +6,7 @@ const ProductItem = ({ image, item }) => {
     const navigate = useNavigate();
 
     const showDisc = () => {
-        navigate(`/product/${item.id}`, { state: { item } });
+        navigate(`/product/${item.name}`, { state: { item } });
     }
 
     return (
