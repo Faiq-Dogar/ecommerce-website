@@ -10,6 +10,7 @@ import Btns2 from '../componenets/Btns2';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../Context/actions/userActions';
+import CountDown from '../componenets/CountDown';
 
 // const LandingPage = ({saleImage}) => {
 
@@ -29,7 +30,7 @@ const LandingPage = ({ items, saleImage , add_to_cart}) => {
     return (
         <div>
             <ImageCarousel />
-
+            <CountDown statingSeconds={"1721043540347"} />
             <BestSelling
                 text={"Flash Sales"}
                 items={items.filter(item => item.newPrice !== 0).slice(0, 4)}
