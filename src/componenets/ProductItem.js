@@ -11,8 +11,6 @@ const ProductItem = ({ image, item, add_to_cart }) => {
         navigate(`/product/${item.name}`, { state: { item } });
     }
 
-    console.log("Items form ProductItem", item);
-
     return (
         <div>
             <img src={image} alt='product image' className='product-image' onClick={showDisc} />

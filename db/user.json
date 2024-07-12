@@ -31,6 +31,20 @@
           1
         ]
       }
+    },
+    {
+      "id": "8f32",
+      "name": "Harry Poter",
+      "email": "harry@gmail.com",
+      "password": "harryharry",
+      "cart": {
+        "id": [
+          0
+        ],
+        "quantity": [
+          0
+        ]
+      }
     }
   ]
 }

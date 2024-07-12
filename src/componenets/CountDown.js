@@ -22,9 +22,7 @@ const CountDown = ({ statingSeconds }) => {
         // Calculate time left
         const calculateTimeLeft = () => {
             const now = new Date().getTime();
-            console.log("Now: ", now);
             const distance = parseInt(statingSeconds) - now;
-            console.log("Distance: ", distance);
             if (distance < 0) {
                 clearInterval(interval);
                 return;

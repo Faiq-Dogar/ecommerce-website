@@ -15,8 +15,8 @@ import Cart from './pages/Cart';
 import Billing from './pages/Billing';
 import MyAccount from './pages/MyAccount';
 import { useDispatch } from 'react-redux';
-import { setItems } from './Context/actions/itemActions';
-import { setUserData } from './Context/actions/userActions';
+// import { setItems } from './Context/actions/itemActions';
+// import { setUserData } from './Context/actions/userActions';
 
 function App() {
 
@@ -29,13 +29,15 @@ function App() {
   const [items, setItems] = useState([]);
   const [originalItems, setOriginalItems] = useState([]);
   const [userData, setuserData] = useState([]);
+  const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [loggedin, setloggedin] = useState(false);
   const [user, setUser] = useState([]);
   const [qunatity, setQunatity] = useState(1);
-//khtm
+  //khtm
 
+  let dummy_user;
   useEffect(() => {
     const fetch_items = async () => {
       try {
@@ -47,7 +49,7 @@ function App() {
         // dispatch(setItems(list));
         setItems(list);
         setOriginalItems(list);
-        
+
       } catch (err) {
         console.log("Errrororororororo" + err);
       }
@@ -59,9 +61,11 @@ function App() {
           throw Error('Did not receive Expected data');
         }
         const user = await response.json();
+        dummy_user = user;
         // dispatch(setUserData(user));
-        setUserData(user)
-        console.log("User data" + userData);
+        console.log("User data from fetch_USers:  " , user);
+        setuserData(user)
+        console.log("UserData data from fetch_USers:  " , userData);
       } catch (err) {
         console.log("Errrororororororo" + err);
       }
@@ -69,7 +73,9 @@ function App() {
 
     fetch_items()
     fetch_users()
-  }, [dispatch]);
+  }, []);
+  // }, [dispatch]);
+  
 
   useEffect(() => {
     console.log("USer2: ", user);
@@ -119,6 +125,9 @@ function App() {
     }
 
   };
+  const captureName = (e) => {
+    setName(e.target.value);
+  }
   const captureEmail = (e) => {
     setEmail(e.target.value);
   }
@@ -128,10 +137,53 @@ function App() {
 
 
   const validateUser = () => {
-
+    console.log("User Data: ", userData);
     setUser(userData.filter(user => user.email === email));
     console.log("USer: ", user);
 
+  };
+
+  const handleSubmit = async (e) => {
+    console.log(`Inside handleSubmit, email: ${email}, password ${password}, name: ${name}`);
+    e.preventDefault();
+
+    const newUser = {
+      name,
+      email,
+      password,
+      cart: {
+        "id": [
+          0
+        ],
+        quantity: [
+          0
+        ]
+      },
+    };
+
+    try {
+      const response = await fetch('http://localhost:3501/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newUser),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('User added:', data);
+      setUser(newUser);
+      // Reset form fields
+      setName('');
+      setEmail('');
+      setPassword('');
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -158,7 +210,7 @@ function App() {
         <Route path='/contacts' element={<Contact />} />
         <Route path="/product/:productId" element={<ProductDiscription itemsL={items} add_to_cart={add_to_cart} qunatity={qunatity} setQunatity={setQunatity} />} />
         <Route path="/signIn" element={<Signin captureEmail={captureEmail} capturePassword={capturePassword} validateUser={validateUser} />} />
-        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/signUp" element={<SignUp captureName={captureName} captureEmail={captureEmail} capturePassword={capturePassword} handleSubmit={handleSubmit} />} />
         {/* <Route path="/cart" element={<Cart user={user} />} items={items} cartItems={cartItems} /> */}
         <Route path="/checkout/:productId" element={<Billing qunatity={qunatity} />} />
         <Route path="/MyAccount" element={<MyAccount user={user} />} />
