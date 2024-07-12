@@ -35,11 +35,11 @@ const pages = [
 const settings = [
     {
         name: "Profile",
-        url: "/"
+        url: "/MyAccount"
     },
     {
         name: "Cart",
-        url: "/products"
+        url: "/cart"
     },
     {
         name: "Sign Up",

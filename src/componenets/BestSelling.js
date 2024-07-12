@@ -4,13 +4,13 @@ import { Container } from '@mui/material';
 import Products from './Products';
 import Btns2 from './Btns2';
 
-const BestSelling = ({text, items}) => {
+const BestSelling = ({ text, items, add_to_cart }) => {
     return (
         <Container maxWidth="xl">
             <Heading name={text} />
-            <Products items={items} />
+            <Products items={items} add_to_cart={add_to_cart} />
             {/* <Btns2 text={"View All Products"}/> */}
-            <hr/>
+            <hr />
         </Container>
     )
 }

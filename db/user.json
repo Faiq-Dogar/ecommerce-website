@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Faiq",
+      "email": "faiqd17@gmail.com",
+      "password": "fzfzfzfz",
+      "cart": {
+        "id": [
+          2,
+          7,
+          6
+        ],
+        "quantity": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "2",
+      "name": "Abdullah",
+      "email": "abii@gmail.com",
+      "password": "abiiabii",
+      "cart": {
+        "id": [
+          3
+        ],
+        "quantity": [
+          1
+        ]
+      }
+    }
+  ]
+}

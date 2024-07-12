@@ -10,12 +10,12 @@ const Contact = () => {
         <Container maxWidth="xl">
             <BreadCrum previous={"Home"} now={"Contact"} />
             <Grid container spacing={6} sx={{ mb: "5%" }}>
-                <Grid item xs={6} md={4}>
+                <Grid item xs={12} sm={6} md={4}>
                     <div className='about-dis'>
                         <TextCard />
                     </div>
                 </Grid>
-                <Grid item xs={6} md={8}>
+                <Grid item xs={12} sm={6} md={8}>
                     <Form />
                 </Grid>
             </Grid>

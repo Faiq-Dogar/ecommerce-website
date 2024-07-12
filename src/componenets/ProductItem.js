@@ -1,9 +1,19 @@
-import { Rating, Typography } from '@mui/material';
-import React from 'react'
+import { Button, Rating, Typography } from '@mui/material';
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const ProductItem = ({ image, item }) => {
+const ProductItem = ({ image, item, add_to_cart }) => {
     const navigate = useNavigate();
+
+    // Debugging log to check if add_to_cart is a function
+    // useEffect(() => {
+    //     console.log('add_to_cart:', add_to_cart);
+    //     if (typeof add_to_cart !== 'function') {
+    //         console.error('add_to_cart is not a function');
+    //     }
+    // }, [add_to_cart]);
+
+
 
     const showDisc = () => {
         navigate(`/product/${item.name}`, { state: { item } });
@@ -11,7 +21,16 @@ const ProductItem = ({ image, item }) => {
 
     return (
         <div>
-            <img src={image} alt='product image' className='product-image' onClick={showDisc}/>
+            <img src={image} alt='product image' className='product-image' onClick={showDisc} />
+            <div className='add-cart-btn'>
+                <Button
+                    sx={{ width: "100%", py: "3%" }}
+                    color='error' variant='contained'
+                    onClick={(e) => add_to_cart(parseInt(item.id))}
+                    >
+                    Add to Cart
+                </Button>
+            </div>
             <Typography variant='h6'>
                 {<p>{item.name}</p>}
             </Typography>
