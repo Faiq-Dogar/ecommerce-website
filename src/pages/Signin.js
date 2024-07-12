@@ -4,33 +4,25 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-const Signin = ({ userData, user, setUser }) => {
+const Signin = ({ captureEmail, capturePassword, validateUser }) => {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
     const navigate = useNavigate();
 
-    const captureEmail = (e) => {
-        setEmail(e.target.value);
-    }
-    const capturePassword = (e) => {
-        setPassword(e.target.value);
-    }
+    // const captureEmail = (e) => {
+    //     setEmail(e.target.value);
+    // }
+    // const capturePassword = (e) => {
+    //     setPassword(e.target.value);
+    // }
 
 
-    const validateUser = () => {
-        // var arr = [];
+    // const validateUser = () => {
 
-        // userData.map((user) => (
-        //     arr.push(user)
-        // ))
-        // console.log(arr);
-        // setUser(arr.find(item => item.email === email));
-        // console.log("USer: ", user);
-
-        setUser(userData.filter(user => user.email === email));
-        console.log("USer: ", user);
+    //     setUser(userData.filter(user => user.email === email));
+    //     console.log("USer: ", user);
         
-    };
+    // };
 
     return (
         <Grid container spacing={8} sx={{ my: "2%" }}>

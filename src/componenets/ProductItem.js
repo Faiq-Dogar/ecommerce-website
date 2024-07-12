@@ -1,23 +1,17 @@
 import { Button, Rating, Typography } from '@mui/material';
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 const ProductItem = ({ image, item, add_to_cart }) => {
     const navigate = useNavigate();
 
-    // Debugging log to check if add_to_cart is a function
-    // useEffect(() => {
-    //     console.log('add_to_cart:', add_to_cart);
-    //     if (typeof add_to_cart !== 'function') {
-    //         console.error('add_to_cart is not a function');
-    //     }
-    // }, [add_to_cart]);
-
-
-
     const showDisc = () => {
         navigate(`/product/${item.name}`, { state: { item } });
     }
+
+    console.log("Items form ProductItem", item);
 
     return (
         <div>
@@ -27,7 +21,7 @@ const ProductItem = ({ image, item, add_to_cart }) => {
                     sx={{ width: "100%", py: "3%" }}
                     color='error' variant='contained'
                     onClick={(e) => add_to_cart(parseInt(item.id))}
-                    >
+                >
                     Add to Cart
                 </Button>
             </div>
