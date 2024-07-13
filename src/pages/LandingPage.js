@@ -14,19 +14,19 @@ import CountDown from '../componenets/CountDown';
 
 // const LandingPage = ({saleImage}) => {
 
-const LandingPage = ({ items, saleImage , add_to_cart}) => {
+const LandingPage = ({ items, saleImage, add_to_cart }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     // const items = useSelector(state => state.items.items);
 
-    const moveToProduct = () => {   
+    const moveToProduct = () => {
         navigate(`/products`);
     }
 
-    const handleAddToCart = (item_id) => {
-        dispatch(addToCart(item_id));
-    }
+    // const handleAddToCart = (item_id) => {
+    //     dispatch(addToCart(item_id));
+    // }
     return (
         <div>
             <ImageCarousel />
@@ -34,17 +34,24 @@ const LandingPage = ({ items, saleImage , add_to_cart}) => {
             <BestSelling
                 text={"Flash Sales"}
                 items={items.filter(item => item.newPrice !== 0).slice(0, 4)}
-                add_to_cart={handleAddToCart}
+                add_to_cart={add_to_cart}
             />
-            <Btns2 text={"View All Products"} path={moveToProduct}/>
+            <Btns2 text={"View All Products"} path={moveToProduct} />
             <Category
                 isdisable={true}
             />
-            <BestSelling text={"Best Selling Products"} items={items.sort((a, b) => b.rating - a.rating).slice(0, 4)} />
-            <Btns2 text={"View All Products"} path={moveToProduct}/>
+            <BestSelling
+                text={"Best Selling Products"}
+                items={items.sort((a, b) => b.rating - a.rating).slice(0, 4)}
+                add_to_cart={add_to_cart}
+            />
+            <Btns2 text={"View All Products"} path={moveToProduct} />
             <Offer saleImage={saleImage} />
-            <BestSelling text={"Explore Our Products"} items={items} />
-            <Btns2 text={"View All Products"} path={moveToProduct}/>
+            <BestSelling
+                text={"Explore Our Products"}
+                items={items}
+                add_to_cart={add_to_cart} />
+            <Btns2 text={"View All Products"} path={moveToProduct} />
             <NewArrival />
             <Features />
         </div>

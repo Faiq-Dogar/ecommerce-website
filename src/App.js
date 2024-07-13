@@ -41,6 +41,8 @@ function App() {
   const [shipping, setShipping] = useState(5);
   //khtm
 
+  let user2;
+
   const fetch_users = async () => {
     try {
       const response = await fetch(API_URL_USER);
@@ -60,7 +62,7 @@ function App() {
     console.log("User Data: ", userData);
     setUser(userData.filter(user => user.email === email));
     console.log("USer: ", user);
-
+    localStorage.setItem('isLoggedIn', JSON.stringify(true));
   };
 
   useEffect(() => {
@@ -81,6 +83,12 @@ function App() {
     }
     fetch_items()
     fetch_users()
+
+    setloggedin(JSON.parse(localStorage.getItem('isLoggedIn')));
+    if (loggedin) {
+      // validateUser();
+    }
+
   }, []);
   // }, [dispatch]);
 
@@ -226,9 +234,22 @@ function App() {
           aboutImage={aboutImage}
         />} />
         <Route path='/contacts' element={<Contact />} />
-        <Route path="/product/:productId" element={<ProductDiscription itemsL={items} add_to_cart={add_to_cart} qunatity={qunatity} setQunatity={setQunatity} />} />
-        <Route path="/signIn" element={<Signin captureEmail={captureEmail} capturePassword={capturePassword} validateUser={validateUser} />} />
-        <Route path="/signUp" element={<SignUp captureName={captureName} captureEmail={captureEmail} capturePassword={capturePassword} handleSubmit={handleSubmit} />} />
+        <Route path="/product/:productId" element={<ProductDiscription
+          itemsL={items}
+          add_to_cart={add_to_cart}
+          qunatity={qunatity}
+          setQunatity={setQunatity} />} />
+        <Route path="/signIn" element={<Signin
+          captureEmail={captureEmail}
+          capturePassword={capturePassword}
+          validateUser={validateUser}
+        />} />
+        <Route path="/signUp" element={<SignUp
+          captureName={captureName}
+          captureEmail={captureEmail}
+          capturePassword={capturePassword}
+          handleSubmit={handleSubmit}
+        />} />
         <Route path="/cart" element={<Cart
           user={user}
           items={items}
