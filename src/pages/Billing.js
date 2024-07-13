@@ -5,12 +5,11 @@ import InputField from '../componenets/InputField'
 import { useLocation } from 'react-router-dom'
 import Btns2 from '../componenets/Btns2'
 
-const Billing = ({ qunatity }) => {
+const Billing = ({ qunatity, shipping }) => {
     const location = useLocation();
     const { item } = location.state;
     const [itemprice, setItemprice] = useState(0);
     const [subTotal, setSubTotal] = useState(0);
-    const [shipping, setShbpping] = useState(0);
     const [total, setTotal] = useState(0);
 
     useEffect(() => {
@@ -73,7 +72,7 @@ const Billing = ({ qunatity }) => {
                             <Stack direction="row" sx={{ width: '100%' }} justifyContent="space-between" alignItems="center">
                                 <ListItemText primary="Shipping" />
                                 <Typography gutterBottom variant="body1" component="div">
-                                    Free
+                                    {shipping === 0 ? "Free" : shipping}
                                 </Typography>
                             </Stack>
                         </ListItem>

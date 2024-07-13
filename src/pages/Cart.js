@@ -11,61 +11,39 @@ const Cart = ({ user, items }) => {
     const [matchedProducts, setMatchedProducts] = useState([]);
 
     useEffect(() => {
-
-        // user.forEach((item) => {
-        //     item.cart.id.forEach((cartItem, key) => {
-        //         items.filter(singleItem => singleItem.id == cartItem).forEach((singleItem) => {
-        //             const matchedProduct = {
-        //                 name: singleItem.name,  
-        //                 quantity: item.cart.quantity[key]
-        //             };
-        //             matchedProducts.push(matchedProduct);
-        //         });
-        //     });
-        // });
-
+        let total = 0;
         const matched = [];
         user.forEach((item) => {
             item.cart.id.forEach((cartItem, key) => {
                 items.filter(singleItem => singleItem.id == cartItem).forEach((singleItem) => {
                     const matchedProduct = {
                         name: singleItem.name,
-                        quantity: item.cart.quantity[key]
+                        // quantity: item.cart.quantity[key]
+                        subTotal: singleItem.oldPrice * item.cart.quantity[key]
                     };
                     matched.push(matchedProduct);
+                    total += singleItem.oldPrice * item.cart.quantity[key];
                 });
             });
         });
 
         setMatchedProducts(matched);
-
+        setCarttotalPrice(total);
         console.log(matchedProducts);
 
-        let total = 0;
-        user.forEach((item) => {
-            item.cart.id.forEach((cartItem, key) => {
-                items.filter(singleItem => singleItem.id == cartItem).forEach((singleItem) => {
-                    total += singleItem.oldPrice * item.cart.quantity[key];
-                });
-            });
-        });
-        setCarttotalPrice(total);
+        // let total = 0;
+        // user.forEach((item) => {
+        //     item.cart.id.forEach((cartItem, key) => {
+        //         items.filter(singleItem => singleItem.id == cartItem).forEach((singleItem) => {
+        //             total += singleItem.oldPrice * item.cart.quantity[key];
+        //         });
+        //     });
+        // });
+        // setCarttotalPrice(total);
     }, [user, items]);
 
-    // useEffect(() => {
-    //     let total = 0;
-    //     user.forEach((item) => {
-    //         item.cart.id.forEach((cartItem, key) => {
-    //             items.filter(singleItem => singleItem.id == cartItem).forEach((singleItem) => {
-    //                 total += singleItem.oldPrice * item.cart.quantity[key];
-    //             });
-    //         });
-    //     });
-    //     setCarttotalPrice(total);
-    // }, [user, items]);
-
     const buyProduct = () => {
-        navigate(`/Cartcheckout/${matchedProducts}`, { state: { matchedProducts } });
+        navigate(`/Cartcheckout/${matchedProducts}`, { state: { matchedProducts,cartTotalPrice } });
     }
 
     return (

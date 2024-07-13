@@ -38,6 +38,7 @@ function App() {
   const [loggedin, setloggedin] = useState(false);
   const [user, setUser] = useState([]);
   const [qunatity, setQunatity] = useState(1);
+  const [shipping, setShipping] = useState(5);
   //khtm
 
   const fetch_users = async () => {
@@ -225,9 +226,14 @@ function App() {
           user={user}
           items={items}
         />} />
-        <Route path="/checkout/:productId" element={<Billing qunatity={qunatity} />} />
+        <Route path="/checkout/:productId" element={<Billing
+          qunatity={qunatity}
+          shipping={shipping}
+        />} />
         <Route path="/MyAccount" element={<MyAccount user={user} />} />
-        <Route path="/Cartcheckout/:cartItems" element={<CartBilling />} />
+        <Route path="/Cartcheckout/:cartItems" element={<CartBilling
+          shipping={shipping}
+        />} />
       </Routes>
       <Footer />
     </>

@@ -5,9 +5,9 @@ import InputField from '../componenets/InputField'
 import { useLocation } from 'react-router-dom';
 import Btns2 from '../componenets/Btns2'
 
-const CartBilling = () => {
+const CartBilling = ({ shipping }) => {
     const location = useLocation();
-    const { matchedProducts } = location.state;
+    const { matchedProducts, cartTotalPrice } = location.state;
 
     console.log('Cart Billing Items: ', matchedProducts);
 
@@ -34,21 +34,24 @@ const CartBilling = () => {
                 </Grid>
                 <Grid item xs={6} md={6}>
                     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                        <ListItem >
-                            <Stack direction="row" sx={{ width: '100%' }} justifyContent="space-between" alignItems="center">
-                                <ListItemText
-                                // primary={item.name}
-                                />
-                                <Typography gutterBottom variant="body1" component="div">
-                                    {/* Rs. {itemprice} /- */}
-                                </Typography>
-                            </Stack>
-                        </ListItem>
+                        {matchedProducts.map((item, index) => (
+
+                            <ListItem key={index}>
+                                <Stack direction="row" sx={{ width: '100%' }} justifyContent="space-between" alignItems="center">
+                                    <ListItemText
+                                        primary={item.name}
+                                    />
+                                    <Typography gutterBottom variant="body1" component="div">
+                                        Rs. {item.subTotal} /-
+                                    </Typography>
+                                </Stack>
+                            </ListItem>
+                        ))}
                         <ListItem>
                             <Stack direction="row" sx={{ width: '100%' }} justifyContent="space-between" alignItems="center">
                                 <ListItemText primary="Sub Total" />
                                 <Typography gutterBottom variant="body1" component="div">
-                                    {/* Rs. {subTotal} /- */}
+                                    Rs. {cartTotalPrice} /-
                                 </Typography>
                             </Stack>
                         </ListItem>
@@ -57,7 +60,7 @@ const CartBilling = () => {
                             <Stack direction="row" sx={{ width: '100%' }} justifyContent="space-between" alignItems="center">
                                 <ListItemText primary="Shipping" />
                                 <Typography gutterBottom variant="body1" component="div">
-                                    Free
+                                    {shipping === 0 ? "Free" : shipping}
                                 </Typography>
                             </Stack>
                         </ListItem>
@@ -66,7 +69,7 @@ const CartBilling = () => {
                             <Stack direction="row" sx={{ width: '100%' }} justifyContent="space-between" alignItems="center">
                                 <ListItemText primary="total" />
                                 <Typography gutterBottom variant="h6" component="div">
-                                    {/* Rs. {total} /- */}
+                                    Rs. {cartTotalPrice + shipping} /-
                                 </Typography>
                             </Stack>
                         </ListItem>
@@ -90,43 +93,3 @@ const CartBilling = () => {
 }
 
 export default CartBilling
-
-
-
-{/* 
-
-import React, { useEffect, useState } from 'react'
-
-const Billing = ({ qunatity }) => {
-    const location = useLocation();
-    const { item } = location.state;
-    const [itemprice, setItemprice] = useState(0);
-    const [subTotal, setSubTotal] = useState(0);
-    const [shipping, setShbpping] = useState(0);
-    const [total, setTotal] = useState(0);
-
-    useEffect(() => {
-        setItemprice(item.oldPrice * qunatity);
-        console.log("Quantity: ", qunatity);
-        console.log("Item Price: ", itemprice);
-    }, [item.oldPrice, qunatity]);
-
-    useEffect(() => {
-        setSubTotal(itemprice);
-        console.log("Subtotal: ", subTotal);
-    }, [itemprice]);
-
-    useEffect(() => {
-        setTotal(subTotal + shipping);
-        console.log("Total: ", setTotal);
-    }, [subTotal, shipping]);
-
-    return (
-
-                </Grid>
-            </Grid>
-        </Container>
-    )
-}
-
-export default Billing */}
