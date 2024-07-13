@@ -39,10 +39,12 @@
       "password": "harryharry",
       "cart": {
         "id": [
-          0
+          0,
+          5
         ],
         "quantity": [
-          0
+          0,
+          1
         ]
       }
     }

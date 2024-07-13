@@ -100,7 +100,14 @@ function App() {
 
   const add_to_cart = async (item_id) => {
     try {
-      const response = await fetch(`${API_URL_USER}/${1}`);
+
+      const value = JSON.parse(localStorage.getItem('UserCart'));
+      console.log(value);
+
+      const userId = value[0].id;
+      console.log(userId);
+
+      const response = await fetch(`${API_URL_USER}/${userId}`);
 
       if (!response.ok) {
         throw Error('Did not resolve Expected user data');
@@ -112,7 +119,7 @@ function App() {
         user.cart.id.push(item_id);
         user.cart.quantity.push(1);
 
-        const UpdateData = await fetch(`${API_URL_USER}/${1}`, {
+        const UpdateData = await fetch(`${API_URL_USER}/${userId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
