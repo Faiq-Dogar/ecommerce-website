@@ -30,7 +30,7 @@ const LandingPage = ({ items, saleImage , add_to_cart}) => {
     return (
         <div>
             <ImageCarousel />
-            <CountDown statingSeconds={"1721043540347"} />
+            <CountDown statingSeconds={"1721143540347"} />
             <BestSelling
                 text={"Flash Sales"}
                 items={items.filter(item => item.newPrice !== 0).slice(0, 4)}

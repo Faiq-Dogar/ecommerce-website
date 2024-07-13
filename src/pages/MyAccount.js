@@ -42,6 +42,14 @@ const MyAccount = ({ user }) => {
                                     {item.cart.id}
                                 </Typography>
                             </Stack>
+                            <Stack direction="row" justifyContent="space-between" alignItems="center">
+                                <Typography gutterBottom variant="h6" component="div">
+                                    quantity:
+                                </Typography>
+                                <Typography gutterBottom variant="body1" component="div">
+                                    {item.cart.quantity}
+                                </Typography>
+                            </Stack>
                         </div>
                     ))}
                 </Box>

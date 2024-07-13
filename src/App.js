@@ -3,7 +3,7 @@ import LandingPage from './pages/LandingPage';
 import Product from './pages/Product';
 import Footer from './componenets/Footer';
 import { useEffect, useState } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import saleImage from './Images/Screenshot 2024-07-10 013926.png'
 import aboutImage from './Images/Screenshot 2024-07-10 155335.png'
 import About from './pages/About';
@@ -15,6 +15,7 @@ import Cart from './pages/Cart';
 import Billing from './pages/Billing';
 import MyAccount from './pages/MyAccount';
 import { useDispatch } from 'react-redux';
+import CartBilling from './pages/CartBilling';
 // import { setItems } from './Context/actions/itemActions';
 // import { setUserData } from './Context/actions/userActions';
 
@@ -24,6 +25,8 @@ function App() {
   const API_URL_USER = "http://localhost:3501/users";
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
 
   //khtm
   const [items, setItems] = useState([]);
@@ -37,7 +40,28 @@ function App() {
   const [qunatity, setQunatity] = useState(1);
   //khtm
 
-  let dummy_user;
+  const fetch_users = async () => {
+    try {
+      const response = await fetch(API_URL_USER);
+      if (!response.ok) {
+        throw Error('Did not receive Expected data');
+      }
+      const user = await response.json();
+      // dispatch(setUserData(user));
+      console.log("User data from fetch_USers:  ", user);
+      setuserData(user)
+      console.log("UserData data from fetch_USers:  ", userData);
+    } catch (err) {
+      console.log("Errrororororororo" + err);
+    }
+  }
+  const validateUser = () => {
+    console.log("User Data: ", userData);
+    setUser(userData.filter(user => user.email === email));
+    console.log("USer: ", user);
+
+  };
+
   useEffect(() => {
     const fetch_items = async () => {
       try {
@@ -54,34 +78,17 @@ function App() {
         console.log("Errrororororororo" + err);
       }
     }
-    const fetch_users = async () => {
-      try {
-        const response = await fetch(API_URL_USER);
-        if (!response.ok) {
-          throw Error('Did not receive Expected data');
-        }
-        const user = await response.json();
-        dummy_user = user;
-        // dispatch(setUserData(user));
-        console.log("User data from fetch_USers:  " , user);
-        setuserData(user)
-        console.log("UserData data from fetch_USers:  " , userData);
-      } catch (err) {
-        console.log("Errrororororororo" + err);
-      }
-    }
-
     fetch_items()
     fetch_users()
   }, []);
   // }, [dispatch]);
-  
+
 
   useEffect(() => {
     console.log("USer2: ", user);
     localStorage.setItem('UserCart', JSON.stringify(user));
 
-    if (user) {
+    if ((location.pathname.startsWith('/signIn') || location.pathname.startsWith('/signUp')) && user) {
       navigate('/');
     }
   }, [user]);
@@ -116,9 +123,17 @@ function App() {
           throw new Error('Failed to update user cart');
         }
         console.log('User cart updated successfully');
+        fetch_users()
+        console.log('Users fetched again');
+        validateUser()
+        console.log('Users filtered again');
 
       } else {
         console.log('Product already in cart');
+        fetch_users()
+        console.log('Users fetched again from else');
+        validateUser()
+        console.log('Users filtered again from else');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -136,12 +151,7 @@ function App() {
   }
 
 
-  const validateUser = () => {
-    console.log("User Data: ", userData);
-    setUser(userData.filter(user => user.email === email));
-    console.log("USer: ", user);
 
-  };
 
   const handleSubmit = async (e) => {
     console.log(`Inside handleSubmit, email: ${email}, password ${password}, name: ${name}`);
@@ -211,9 +221,13 @@ function App() {
         <Route path="/product/:productId" element={<ProductDiscription itemsL={items} add_to_cart={add_to_cart} qunatity={qunatity} setQunatity={setQunatity} />} />
         <Route path="/signIn" element={<Signin captureEmail={captureEmail} capturePassword={capturePassword} validateUser={validateUser} />} />
         <Route path="/signUp" element={<SignUp captureName={captureName} captureEmail={captureEmail} capturePassword={capturePassword} handleSubmit={handleSubmit} />} />
-        {/* <Route path="/cart" element={<Cart user={user} />} items={items} cartItems={cartItems} /> */}
+        <Route path="/cart" element={<Cart
+          user={user}
+          items={items}
+        />} />
         <Route path="/checkout/:productId" element={<Billing qunatity={qunatity} />} />
         <Route path="/MyAccount" element={<MyAccount user={user} />} />
+        <Route path="//checkout/cartItems" element={<CartBilling />} />
       </Routes>
       <Footer />
     </>

@@ -19,19 +19,6 @@ const DiscriptionGrid = ({ item, qunatity, setQunatity }) => {
             setQunatity(1);
         }
     }, [location.pathname, setQunatity]);
-    // useEffect(() => {
-    //     const currentPath = location.pathname;
-    //     const handleRouteChange = () => {
-    //         if (currentPath.includes('/product/')) {
-    //             setQunatity(1);
-    //         }
-    //     };
-
-    //     // Listen for route changes
-    //     return () => {
-    //         handleRouteChange();
-    //     };
-    // }, [location]);
 
     const buyProduct = () => {
         navigate(`/checkout/${item.name}`, { state: { item } });
