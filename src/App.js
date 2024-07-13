@@ -227,7 +227,7 @@ function App() {
         />} />
         <Route path="/checkout/:productId" element={<Billing qunatity={qunatity} />} />
         <Route path="/MyAccount" element={<MyAccount user={user} />} />
-        <Route path="//checkout/cartItems" element={<CartBilling />} />
+        <Route path="/Cartcheckout/:cartItems" element={<CartBilling />} />
       </Routes>
       <Footer />
     </>

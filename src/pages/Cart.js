@@ -6,25 +6,38 @@ import { useNavigate } from 'react-router-dom';
 const Cart = ({ user, items }) => {
     const [cartTotalPrice, setCarttotalPrice] = useState(0);
     const navigate = useNavigate();
-    const matchedProducts = [];
+    // const matchedProducts = [];
 
-    const buyProduct = () => {
-        navigate(`/checkout/cartItems`, { state: { matchedProducts } });
-    }
+    const [matchedProducts, setMatchedProducts] = useState([]);
 
     useEffect(() => {
 
+        // user.forEach((item) => {
+        //     item.cart.id.forEach((cartItem, key) => {
+        //         items.filter(singleItem => singleItem.id == cartItem).forEach((singleItem) => {
+        //             const matchedProduct = {
+        //                 name: singleItem.name,  
+        //                 quantity: item.cart.quantity[key]
+        //             };
+        //             matchedProducts.push(matchedProduct);
+        //         });
+        //     });
+        // });
+
+        const matched = [];
         user.forEach((item) => {
             item.cart.id.forEach((cartItem, key) => {
                 items.filter(singleItem => singleItem.id == cartItem).forEach((singleItem) => {
                     const matchedProduct = {
-                        name: singleItem.name,  
+                        name: singleItem.name,
                         quantity: item.cart.quantity[key]
                     };
-                    matchedProducts.push(matchedProduct);
+                    matched.push(matchedProduct);
                 });
             });
         });
+
+        setMatchedProducts(matched);
 
         console.log(matchedProducts);
 
@@ -50,6 +63,10 @@ const Cart = ({ user, items }) => {
     //     });
     //     setCarttotalPrice(total);
     // }, [user, items]);
+
+    const buyProduct = () => {
+        navigate(`/Cartcheckout/${matchedProducts}`, { state: { matchedProducts } });
+    }
 
     return (
         <Container maxWidth="xl">
