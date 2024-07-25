@@ -51,7 +51,7 @@ const settings = [
     }
 ];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({email}) {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -123,7 +123,7 @@ function ResponsiveAppBar() {
                         <IconButton
                             size="large"
                             aria-label="account of current user"
-                            aria-controls="menu-appbar"
+                            aria-controls="menu-appbar-small"
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
                             color="inherit"
@@ -131,7 +131,7 @@ function ResponsiveAppBar() {
                             <MenuIcon />
                         </IconButton>
                         <Menu
-                            id="menu-appbar"
+                            id="menu-appbar-small"
                             anchorEl={anchorElNav}
                             anchorOrigin={{
                                 vertical: 'bottom',
@@ -216,6 +216,15 @@ function ResponsiveAppBar() {
                                     <Typography textAlign="center">{setting.name}</Typography>
                                 </MenuItem>
                             ))}
+                            {email === "faiqd17@gmail.com" && (
+                                <MenuItem
+                                    key="Admin Panel"
+                                    component={Link}
+                                    to="/AdminPanel"
+                                    onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center">Admin Panel</Typography>
+                                </MenuItem>
+                            )}
                         </Menu>
                     </Box>
                 </Toolbar>

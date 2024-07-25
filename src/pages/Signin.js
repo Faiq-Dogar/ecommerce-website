@@ -36,16 +36,16 @@ const Signin = ({ captureEmail, capturePassword, validateUser }) => {
                             Log in to EXCLUSIVE
                         </Typography>
                         <TextField
-                            id="standard-search"
+                            id="get-email"
                             label="Email Address"
-                            type="search"
+                            type="email"
                             variant="standard"
                             onChange={captureEmail}
                         />
                         <TextField
-                            id="standard-search"
+                            id="get-password"
                             label="Password"
-                            type="search"
+                            type="password"
                             variant="standard"
                             onChange={capturePassword}
                         />

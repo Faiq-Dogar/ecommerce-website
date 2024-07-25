@@ -16,14 +16,14 @@ const MyAccount = ({ user }) => {
                         My Info
                     </Typography>
                     <Divider sx={{ my: "5%" }} />
-                    {user.map((item, index) => (
-                        <div key={index}>
+                    {user ? (
+                        <div>
                             <Stack direction="row" justifyContent="space-between" alignItems="center">
                                 <Typography gutterBottom variant="h6" component="div">
                                     Name:
                                 </Typography>
                                 <Typography gutterBottom variant="body1" component="div">
-                                    {item.name}
+                                    {user.name}
                                 </Typography>
                             </Stack>
                             <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -31,27 +31,32 @@ const MyAccount = ({ user }) => {
                                     Email:
                                 </Typography>
                                 <Typography gutterBottom variant="body1" component="div">
-                                    {item.email}
+                                    {user.email}
+                                </Typography>
+                            </Stack>
+                            {/* <Stack direction="row" justifyContent="space-between" alignItems="center">
+                                <Typography gutterBottom variant="h6" component="div">
+                                    Cart:
+                                </Typography>
+                                <Typography gutterBottom variant="body1" component="div">
+                                    {user.cart.id.join(", ")} 
                                 </Typography>
                             </Stack>
                             <Stack direction="row" justifyContent="space-between" alignItems="center">
                                 <Typography gutterBottom variant="h6" component="div">
-                                    cart:
+                                    Quantity:
                                 </Typography>
                                 <Typography gutterBottom variant="body1" component="div">
-                                    {item.cart.id}
+                                    {user.cart.quantity.join(", ")}
                                 </Typography>
-                            </Stack>
-                            <Stack direction="row" justifyContent="space-between" alignItems="center">
-                                <Typography gutterBottom variant="h6" component="div">
-                                    quantity:
-                                </Typography>
-                                <Typography gutterBottom variant="body1" component="div">
-                                    {item.cart.quantity}
-                                </Typography>
-                            </Stack>
+                            </Stack> */}
                         </div>
-                    ))}
+                    ) : (
+                        <Typography gutterBottom variant="h5" color="error" component="div" align="center">
+                            You are not logged in!!!
+                        </Typography>
+                    )}
+
                 </Box>
             </Card>
         </Container >
@@ -59,12 +64,3 @@ const MyAccount = ({ user }) => {
 }
 
 export default MyAccount
-// {cart.map((item, index) => (
-//     <TableRow
-//         key={index}
-//         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-//     >
-//         <TableCell component="th" scope="row">{item.id}</TableCell>
-//         <TableCell align="right">{item.name}</TableCell>
-//     </TableRow>
-// ))} */}

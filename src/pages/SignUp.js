@@ -21,21 +21,21 @@ const SignUp = ({ captureName, captureEmail, capturePassword, handleSubmit }) =>
                             <TextField
                                 id="user-name"
                                 label="Name"
-                                type="search"
+                                type="text"
                                 variant="standard"
                                 onChange={captureName}
                             />
                             <TextField
                                 id="user-email"
                                 label="Email Address"
-                                type="search"
+                                type="email"
                                 variant="standard"
                                 onChange={captureEmail}
                             />
                             <TextField
                                 id="user-password"
                                 label="Password"
-                                type="search"
+                                type="password"
                                 variant="standard"
                                 onChange={capturePassword}
                             />

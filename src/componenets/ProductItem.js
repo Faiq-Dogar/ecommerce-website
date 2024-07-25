@@ -18,7 +18,7 @@ const ProductItem = ({ image, item, add_to_cart }) => {
                 <Button
                     sx={{ width: "100%", py: "3%" }}
                     color='error' variant='contained'
-                    onClick={(e) => add_to_cart(parseInt(item.id))}
+                    onClick={(e) => add_to_cart(item._id)}
                 >
                     Add to Cart
                 </Button>

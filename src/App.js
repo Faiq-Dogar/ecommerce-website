@@ -16,16 +16,17 @@ import Billing from './pages/Billing';
 import MyAccount from './pages/MyAccount';
 import { useDispatch } from 'react-redux';
 import CartBilling from './pages/CartBilling';
+import AdminPanel from './pages/AdminPanel';
 // import { setItems } from './Context/actions/itemActions';
 // import { setUserData } from './Context/actions/userActions';
 
 function App() {
 
-  const API_URL_STOCK = "http://localhost:3500/products";
-  const API_URL_USER = "http://localhost:3501/users";
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
 
 
   //khtm
@@ -39,51 +40,34 @@ function App() {
   const [user, setUser] = useState([]);
   const [qunatity, setQunatity] = useState(1);
   const [shipping, setShipping] = useState(5);
+  const [itemName, setItemName] = useState("");
+  const [itemCategory, setItemCategory] = useState("");
+  const [itemPrice, setItemPrice] = useState("");
   //khtm
 
-  let user2;
-
-  const fetch_users = async () => {
-    try {
-      const response = await fetch(API_URL_USER);
-      if (!response.ok) {
-        throw Error('Did not receive Expected data');
-      }
-      const user = await response.json();
-      // dispatch(setUserData(user));
-      console.log("User data from fetch_USers:  ", user);
-      setuserData(user)
-      console.log("UserData data from fetch_USers:  ", userData);
-    } catch (err) {
-      console.log("Errrororororororo" + err);
-    }
+  const GetItems = () => {
+    fetch("http://localhost:3001/")
+      .then(res => res.json())
+      .then(data => {
+        setItems(data);
+        setOriginalItems(data);
+      })
+      .catch(err => console.log("Error: ", err))
   }
-  const validateUser = () => {
-    console.log("User Data: ", userData);
-    setUser(userData.filter(user => user.email === email));
-    console.log("USer: ", user);
-    localStorage.setItem('isLoggedIn', JSON.stringify(true));
-  };
-
+  const GetUser = (userId) => {
+    fetch(`http://localhost:3002/${userId}`)
+      .then(res => res.json())
+      .then(data => {
+        setUser(data);
+        console.log("User from GetUser:", data);
+      })
+      .catch(err => console.log("Error: ", err));
+  }
+  
   
   useEffect(() => {
-    const fetch_items = async () => {
-      try {
-        const response = await fetch(API_URL_STOCK);
-        if (!response.ok) {
-          throw Error('Did not receive Expected data');
-        }
-        const list = await response.json();
-        // dispatch(setItems(list));
-        setItems(list);
-        setOriginalItems(list);
-
-      } catch (err) {
-        console.log("Errrororororororo" + err);
-      }
-    }
-    fetch_items()
-    fetch_users()
+    GetItems();
+    // GetUser();
 
     setloggedin(JSON.parse(localStorage.getItem('isLoggedIn')));
     if (loggedin) {
@@ -97,60 +81,70 @@ function App() {
   useEffect(() => {
     console.log("USer2: ", user);
     localStorage.setItem('UserCart', JSON.stringify(user));
-
+    
     if ((location.pathname.startsWith('/signIn') || location.pathname.startsWith('/signUp')) && user) {
       navigate('/');
     }
   }, [user]);
+  
+  
+  const validateUser = async (e) => {
+    e.preventDefault();
 
+    try {
+      const response = await fetch("http://localhost:3002/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("User Logged in Successfully!");
+        console.log("Response data:", data);
+        console.log("Status: ", data.email)
+        setUser(data);
+        setloggedin(true);
+        GetUser(data._id);
+      } else {
+        console.error("Failed to log in.");
+      }
+    } catch (error) {
+      console.error("An Error Occurred while logging in: ", error);
+    }
+  }
   const filter = (catory) => {
-    setItems(originalItems.filter((item) => item.catagory === catory));
+    
+    setItems(originalItems);
+    // if(catory === 'clothing')
+    // {
+    //   console.log("efjrfnjrfnr");
+    //   setItems(originalItems.filter((item) => item.category == 'women'));
+    // }
+    setItems(originalItems.filter((item) => item.category === catory));
   }
 
   const add_to_cart = async (item_id) => {
     try {
+      console.log(user._id);
+      const userId = user._id;
+      console.log(item_id);
 
-      const value = JSON.parse(localStorage.getItem('UserCart'));
-      console.log(value);
-
-      const userId = value[0].id;
-      console.log(userId);
-
-      const response = await fetch(`${API_URL_USER}/${userId}`);
-
-      if (!response.ok) {
-        throw Error('Did not resolve Expected user data');
-      }
-      const user = await response.json();
-      setuserData(user);
-      console.log("User data" + userData);
-      if (!user.cart.id.includes(item_id)) {
-        user.cart.id.push(item_id);
-        user.cart.quantity.push(1);
-
-        const UpdateData = await fetch(`${API_URL_USER}/${userId}`, {
+      try {
+        const response = await fetch(`http://localhost:3002/${userId}/cart`, {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(user)
+          body: JSON.stringify({ item_id }),
         });
-
-        if (!UpdateData.ok) {
-          throw new Error('Failed to update user cart');
-        }
-        console.log('User cart updated successfully');
-        fetch_users()
-        console.log('Users fetched again');
-        validateUser()
-        console.log('Users filtered again');
-
-      } else {
-        console.log('Product already in cart');
-        fetch_users()
-        console.log('Users fetched again from else');
-        validateUser()
-        console.log('Users filtered again from else');
+        const data = await response.json();
+        setUser(data.user);
+        console.log('Cart updated successfully:', data);
+      } catch (err) {
+        console.error("Error updating cart:", err);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -166,7 +160,16 @@ function App() {
   const capturePassword = (e) => {
     setPassword(e.target.value);
   }
-
+  const captureItemName = (e) => {
+    setItemName(e.target.value);
+  }
+  const captureItemPrice = (e) => {
+    setItemPrice(e.target.value);
+  }
+  const captureItemcategory = (e) => {
+    setItemCategory(e.target.value);
+  }
+  
 
 
 
@@ -177,45 +180,78 @@ function App() {
     const newUser = {
       name,
       email,
-      password,
-      cart: {
-        "id": [
-          0
-        ],
-        quantity: [
-          0
-        ]
-      },
+      password
     };
 
     try {
-      const response = await fetch('http://localhost:3501/users', {
-        method: 'POST',
+      const response = await fetch('http://localhost:3002/signup', {
+        method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newUser),
+
       });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("User created Successfully!");
+        console.log("Response data:", data);
+        setUser(data);
+        setName('');
+        setEmail('');
+        setPassword('');
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      } else {
+        console.error("Failed to log in.");
       }
-
-      const data = await response.json();
-      console.log('User added:', data);
-      setUser(newUser);
-      // Reset form fields
-      setName('');
-      setEmail('');
-      setPassword('');
-    } catch (error) {
-      console.error('Error:', error);
+    }
+    catch (error) {
+      console.log("Error: ", error);
     }
   };
 
+  const addItemtoDB = async (e) => {
+    console.log(`Inside handleSubmit, ItemName: ${itemName}, ItemCategory ${itemCategory}, ItemPrice: ${itemPrice}`);
+    e.preventDefault();
+
+    const newItem = {
+      itemName,
+      itemCategory,
+      itemPrice
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/additem', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newItem),
+
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Item added Successfully!");
+        console.log("Response data:", data);
+        setItems(data.items);
+        setItemName('');
+        setItemCategory('');
+        setItemPrice('');
+
+      } else {
+        console.error("Failed to log in.");
+      }
+    }
+    catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+
+
   return (
     <>
-      <ResponsiveAppBar />
+      <ResponsiveAppBar email={email}/>
       <Routes>
         {/* <Route path='/' element={<LandingPage
           saleImage={saleImage}
@@ -262,6 +298,13 @@ function App() {
         <Route path="/MyAccount" element={<MyAccount user={user} />} />
         <Route path="/Cartcheckout/:cartItems" element={<CartBilling
           shipping={shipping}
+        />} />
+        <Route path="/AdminPanel" element={<AdminPanel
+          username={user.name}
+          captureItemName={captureItemName}
+          captureItemPrice={captureItemPrice}
+          captureItemcategory={captureItemcategory}
+          addItemtoDB={addItemtoDB}
         />} />
       </Routes>
       <Footer />
